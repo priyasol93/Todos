@@ -55,7 +55,71 @@
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, id.</p>
 
     </div>
-    <script src="project1.js"></script>
+    <script>
+const para=document.querySelector('p');
+//console.log(para.textContent);
+const addform=document.querySelector('.add');
+const m=document.querySelector('.todos');
+let s1=document.querySelector('.search input');
+const template=(todo)=>{
+    const html=` <li class="list-group-item d-flex justify-content-between">
+    <span>${todo}</span>
+<i class="fa fa-trash" aria-hidden="true"></i>
+</li>`;
+m.innerHTML+=html;
+};
+
+addform.addEventListener('submit',(e)=>{
+    e.preventDefault();
+let todo=addform.listing.value.trim();
+console.log(todo);
+if(todo.length){
+template(todo);
+addform.reset();
+}
+})
+var filterTodo=(p2)=>{
+    
+Array.from(m.children) 
+.filter((val)=>{
+return !val.textContent.toLowerCase().includes(p2);
+})
+.forEach(val=>{
+    val.classList.add('filtered');
+})
+Array.from(m.children) 
+.filter((val)=>{
+return val.textContent.includes(p2);
+})
+.forEach(val=>{
+    val.classList.remove('filtered');
+})
+}
+
+//KEYUP 
+s1.addEventListener('keyup',(e)=>{
+    e.preventDefault();
+    const t4=s1.value.toLowerCase().trim();
+    filterTodo(t4);
+})
+
+
+// var arr=[10,20,30,40,50];
+// var a1=arr.filter((v)=>{
+// return v>20;
+// })
+// console.log(a1);
+m.addEventListener('click',e=>{
+    if(e.target.classList.contains('fa-trash')){
+e.target.parentElement.remove();
+console.log(e.target.parentElement);
+    }
+})
+
+
+
+
+</script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
